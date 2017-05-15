@@ -14,7 +14,7 @@
 			        </div>
 			
 			        <!--Body-->
-			        <form id="loginForm">
+			        <form id="loginForm" autocomplete="on">
 			                <div class="md-form">
 					            <i class="fa fa-user prefix"></i>
 					            <input type="text" id="username"  class="form-control" name="username" required/>
@@ -23,11 +23,17 @@
 					
 					        <div class="md-form">
 					            <i class="fa fa-lock prefix"></i>
-					            <input type="password" id="password" class="form-control" name="password" required/>
+					            <input type="password" id="password" class="form-control" name="password" autocomplete="off" required/>
 					            <label for="form4">Your password</label>
 					        </div>
-					
-					        <div class="text-center">
+					         <div class="md-form">
+					        <fieldset class="form-group">
+					        	<i class="fa fa-user-secret prefix" aria-hidden="true"></i>
+							    <input name="group2" type="radio" class="with-gap" id="radio5">
+							    <label for="radio5">Admin</label>
+							</fieldset>
+							</div>
+							<div class="text-center">
 					            <button class="btn blue darken-3" type="button" id="login">Login</button>
 					        </div>
 						

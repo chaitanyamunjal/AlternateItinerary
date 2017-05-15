@@ -9,8 +9,9 @@
 		
 		        <!--Header-->
 		        <div class="color-amadeus form-header ">
-		            <h3>Similarity City Finder</h3>
+		            <h3>Similar City Finder</h3>
 		        </div>
+		        <p style="color:#2097d3; text-align:center;font-weight:bolder;">Get the list of similar cities and their similarity index.</p>
 		        <!--Body-->
 		        <form id="cityForm">
 			        
@@ -50,19 +51,8 @@
 		<br/><hr>
 	</div>
 	
-	 <div class="col-md-6 offset-md-3" style="padding-top: 30px" id="city_list">
-		<div class="card">
-		    <div class="card-block">
-				<div class="text-center text-danger" id="response1"></div>
-			</div>
-			
-		    <div class="card-block">
-				<div class="text-center text-danger" id="response2"></div>
-			</div>
-		    <div class="card-block">
-				<div class="text-center text-danger" id="response3"></div>
-			</div>
-		</div>
+	 <div class="col-md-6 offset-md-3" style="padding-top: 30px" id="results">
+		
 	</div>
 	
 </main>

@@ -1,6 +1,7 @@
 package com.alternateItinerary.API;
 
 import java.net.UnknownHostException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,10 +18,17 @@ import com.mongodb.util.JSON;
 public class TouristInflowDb {
 
 
-	public double findTouristInflow(String fromCountryName,int x) throws UnknownHostException {	
+	public double findTouristInflow(String fromCountryName,int x) {	
 
 		// connection
-		DB db = (new MongoClient("localhost",27017)).getDB("AlternateItinerary"); 
+		DB db = null;
+		try {
+			db = (new MongoClient("localhost",27017)).getDB("AlternateItinerary");
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0.5;
+		} 
 		
 		// get collection
 		DBCollection dbc = db.getCollection("touristInflow");
@@ -40,18 +48,20 @@ public class TouristInflowDb {
 		tourists = new Gson().fromJson(JSON.serialize(object1.get("tourists")), listType);
 		
 		int touristInflow = tourists.get(0).getMonthwise().get(x).getCount();
-		System.out.println(touristInflow);
 	
-		double touristInflowRiskFactor;
+		double touristInflowRiskFactor = 0;
 		
-		if(touristInflow > 1000000 ){
+		if(touristInflow > 4500000 ){
 			touristInflowRiskFactor = 1;
 		}
-		else if(touristInflow > 500000){
+		else if(touristInflow > 3500000){
+			touristInflowRiskFactor = 0.75;	
+		}
+		else if(touristInflow > 2000000){
 			touristInflowRiskFactor = 0.5;	
 		}
-		else{
-			touristInflowRiskFactor = 0;	
+		else if(touristInflow > 1000000){
+			touristInflowRiskFactor = 0.25;	
 		}
 			
 		return touristInflowRiskFactor;

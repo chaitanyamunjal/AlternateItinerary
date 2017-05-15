@@ -12,6 +12,7 @@
 		        <div class="color-amadeus form-header ">
 		            <h3>Similarity Index Calculator</h3>
 		        </div>
+		        <p style="color:#2097d3; text-align:center;font-weight:bolder;">Check how similar 2 cities of the world are.</p>
 		        <!--Body-->
 		        <form id="HomeForm">
 			        
@@ -64,16 +65,15 @@
 					 </div>
 					<div class="text-center">
 			            <button class="btn blue darken-3" type="button" id="homeSubmit">Find</button>
-			            <hr>
 			        </div> 
 			            <input type="hidden" name="action" id="action" value="home"/>   
-				
 				</form>
 		    </div>
 		</div>
-		<br/><hr>
 	</div>
 	
-	<div class="text-center text-danger" id="response"></div>
+	<div class="col-md-6 offset-md-3" style="padding-top:30px" id="results">
+	
+	</div>
 	
 </main>

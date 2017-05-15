@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
 		request.setAttribute("token",token);
 		System.out.println("this is the token"+token);
 		if(token!=null){
-			response.sendRedirect(request.getContextPath() + "/home");
+			response.sendRedirect(request.getContextPath() + "/main");
 		}
 		String page = "login";
 		request.setAttribute("page", page);
@@ -49,10 +49,18 @@ public class LoginServlet extends HttpServlet {
 			
 			String username = request.getParameter("username");
 			String pass = request.getParameter("password");
+			String admin = request.getParameter("admin");
+			
 			
 			// query to find user with entered username 
 			DB db = (new MongoClient("localhost",27017)).getDB("AlternateItinerary"); 
-			DBCollection dbc = db.getCollection("account");
+			DBCollection dbc;
+			if(admin.equals("0")){
+			 dbc = db.getCollection("account");
+			}
+			else{
+		     dbc = db.getCollection("adminAccount");
+			}
 			
 			BasicDBObject query = new BasicDBObject();
 			query.put("username",username);
@@ -81,6 +89,7 @@ public class LoginServlet extends HttpServlet {
 					flag = 2;
 				}
 				
+				
 				if(flag == 2){
 					
 					// AJAX Response to the AJAX Request from Login.jsp  -->> SUCCESS RESPONSE
@@ -88,6 +97,7 @@ public class LoginServlet extends HttpServlet {
 					request.getSession().setAttribute("name", name);
 					request.getSession().setAttribute("un",username);
 					request.getSession().setAttribute("pic", (String)object.get("pic"));
+					request.getSession().setAttribute("admin",admin);
 					PrintWriter out = response.getWriter();
 					out.print("{ \"data\" : \"success\" }"); 
 					out.flush();

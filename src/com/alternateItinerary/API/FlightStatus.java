@@ -1,11 +1,8 @@
 package com.alternateItinerary.API;
 
 import javax.ws.rs.core.MultivaluedMap;
-
 import org.json.JSONObject;
-
 import com.alternateItinerary.Config;
-import com.alternateItinerary.Model.DelayIndexApi.DelayIndexMain;
 import com.alternateItinerary.Model.FlightStatusApi.FlightStatusMain;
 import com.google.gson.Gson;
 import com.sun.jersey.api.client.Client;
@@ -36,10 +33,16 @@ public double findFlightStatus(String airline, String flightnumber, String date,
         FlightStatusMain obj = new Gson().fromJson(output2,FlightStatusMain.class);
 
         String status ="";
-        if(obj.getFlightStatuses().get(0).getStatus() != null){
+        
+        
+        if(obj.getFlightStatuses().isEmpty()){   // when we are getting empty flight status from the API 
+        	status = "U";  // or u can also put the status AS " Scheduled "
+        } 
+        else if(obj.getFlightStatuses().get(0).getStatus() != null){
 			status = obj.getFlightStatuses().get(0).getStatus();	
 		}
-		System.out.println("Status of the flight is = "+ status);
+		
+        //System.out.println("Status of the flight is = "+ status);
     	
         double flightRiskFactor = 0;
         
@@ -47,10 +50,10 @@ public double findFlightStatus(String airline, String flightnumber, String date,
         	flightRiskFactor = 1;
         }
         else if(status.equals("U")){
-        	flightRiskFactor = 0.25;
+        	flightRiskFactor = 0.3;
         }
         else if(status.equals("S") || status.equals("L")){
-        	flightRiskFactor = 0;
+        	flightRiskFactor = 0.2;
         }
         
         return flightRiskFactor;

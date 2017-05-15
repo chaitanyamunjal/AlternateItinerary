@@ -14,8 +14,9 @@ import com.sun.jersey.core.util.MultivaluedMapImpl;
 
 public class TravelWarningIndex {
 
-public double findTravelWarningIndex(String countrycode) {
+public double findTravelWarningIndex(String countrycode){
 		
+		try{
 		Client client = Client.create();
 		WebResource webResource = client.resource("https://www.reisewarnung.net/api");
 		MultivaluedMap<String, String> queryParams = new MultivaluedMapImpl();
@@ -47,6 +48,10 @@ public double findTravelWarningIndex(String countrycode) {
         }
         
         return travelwarningindexRiskFactor;
+		}
+		catch(Exception e){
+			return 0.25;
+		}
 	}
 
 }

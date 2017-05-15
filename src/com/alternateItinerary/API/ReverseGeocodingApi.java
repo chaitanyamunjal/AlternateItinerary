@@ -1,8 +1,8 @@
 package com.alternateItinerary.API;
 import javax.ws.rs.core.MultivaluedMap;
+
 import org.json.JSONObject;
 import com.alternateItinerary.Config;
-import com.alternateItinerary.Model.Distance24Api.DistanceMain;
 import com.alternateItinerary.Model.GeoCodingApi.Coordinates;
 import com.alternateItinerary.Model.ReverseGeocodingApi.ReverseGeocodingMain;
 import com.google.gson.Gson;

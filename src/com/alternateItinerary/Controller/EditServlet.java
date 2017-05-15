@@ -52,9 +52,18 @@ public class EditServlet extends HttpServlet {
 		
 		// getting the Hidden Input type " ACTION " value
 		String action = request.getParameter("action");
+		
 		// connecting to the database
 		DB db = (new MongoClient("localhost", 27017)).getDB("AlternateItinerary");
-		DBCollection dbc = db.getCollection("account");
+		DBCollection dbc;
+		
+		// Choose the DB Collection "Admin" or "User" that needs to be updated
+		if(request.getSession().getAttribute("admin").equals("1")){
+		dbc = db.getCollection("adminAccount");
+		}
+		else{
+		dbc = db.getCollection("account");
+		}
 		
 		// to check that the image or multipart type file is uploaded
 		String contentType = request.getContentType();

@@ -1,14 +1,7 @@
 package com.alternateItinerary.API;
 
 import java.util.List;
-
-
 import javax.ws.rs.core.MultivaluedMap;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-//import com.alternateItinerary.Config;
 import com.alternateItinerary.Model.LocationKey.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

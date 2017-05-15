@@ -9,12 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.alternateItinerary.Helper.SimilarityIndexCalculator;
+import com.alternateItinerary.API.AdminCustomization;
+import com.alternateItinerary.API.FlightRating;
+import com.alternateItinerary.API.UserCustomization;
+import com.alternateItinerary.Helper.FinalRiskFactorCalculator;
+import com.alternateItinerary.Helper.SimilarityIndexHelper;
+import com.alternateItinerary.RequestResponse.AdminCustomResponse;
+import com.alternateItinerary.RequestResponse.ResponseObject;
+import com.alternateItinerary.RequestResponse.UserCustomResponse;
 import com.google.gson.Gson;
 
-/**
- * Servlet implementation class CityServlet
- */
 @WebServlet("/CityServlet")
 public class CityServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -30,78 +34,44 @@ public class CityServlet extends HttpServlet {
 	
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
 		String city1 = request.getParameter("city1");
 		
-		// " SIMILARITY INDEX HELPER CLASS OBJECT TO BE CREATED HERE "
+		// Get the Checked Factors and their values from Customization
+		String admin = (String) request.getSession().getAttribute("admin");
+  		String username = (String) request.getSession().getAttribute("un");
+  		UserCustomization uc = new UserCustomization();
+		UserCustomResponse ucr = uc.getUserCustom(username);
+		AdminCustomization ac = new AdminCustomization();
+		AdminCustomResponse acr = ac.getAdminCustom();
 		
-		String city2[]={"Paris","London","Venice","Rome","Milan","Singapore","Dubai","Barcelona","Kuala Lumpur","Amsterdam","Bangkok","Beijing","Shanghai","Toronto","Vancouver","New York City","San Francisco","Mexico"};
-		
-		String[] similarCities = new String[18];
-		double[] similarCitiesIndex = new double[18];
-		String[] similarCitiesValue = new String[18];
-		int j = 0;
-		
-		SimilarityIndexCalculator sic = new SimilarityIndexCalculator();
-		
-		double similarityIndex[] = new double[18];
-		
-		for(int i=0;i<18;i++){
-			if(city1.equals(city2[i]))continue;
-			similarityIndex[i] = sic.calclulateSimilarityIndex(city1, city2[i]);
-
-			
-			
-			if(similarityIndex[i] >= 6){
-				similarCities[j] = city2[i];
-				similarCitiesIndex[j] = similarityIndex[i];
-				if(similarityIndex[i] >= 8 ){
-					similarCitiesValue[j] = "high";
-				}
-				else{
-					similarCitiesValue[j] = "medium";
-				}
-				j++;
-			}
-		}
-		
-		// SORTING THE similarCitiesIndex AND similarCities in Decreasing Order of Similarity Index
-		for(int i=0;i<17;i++){
-			int max = i;
-			for(int k =i+1;k<18;k++){
-				if(similarCitiesIndex[k] >  similarCitiesIndex[max]){
-					max = k;
-				}
-			}
-			if(max!=i){
-				// SWAP 
-				double temp1 = similarCitiesIndex[max];
-				similarCitiesIndex[max] = similarCitiesIndex[i];
-				similarCitiesIndex[i] = temp1;
-				
-				String temp2 = similarCities[max];
-				similarCities[max] = similarCities[i];
-				similarCities[i] = temp2;
-				
-
-				String temp3 = similarCitiesValue[max];
-				similarCitiesValue[max] = similarCitiesValue[i];
-				similarCitiesValue[i] = temp3;
-			}
-		}
-		
-		
-		for(int i=0;i<j;i++){
-			System.out.println(" similar city "+ i +" = "+similarCities[i]+" and Similariy Index = "+similarCitiesIndex[i]);
-		}
-
-		ResponseObject ro = new ResponseObject();
-		ro.setSimilarCties(similarCities);
-		ro.setIndex(similarCitiesIndex);
-		ro.setValue(similarCitiesValue);
+		int flag = 0;
+  		if(request.getSession().getAttribute("admin").equals("1")){
+  			flag = 1;
+  		}
+  		else{
+  			if(ucr.getSimilarityFactorsValue().length == 0){
+  				flag = 1;
+  			}
+  		}
   		
-    	String json = new Gson().toJson(ro);
+		String factorValue[];
+		String checkedFactors[];
+		
+		if(flag==1){
+			factorValue = acr.getSimilarityFactorsValue();
+			checkedFactors = acr.getSimilarityFactorsChecked();
+  		}else{
+  			factorValue = ucr.getSimilarityFactorsValue();
+  			checkedFactors = ucr.getSimilarityFactorsChecked();
+  		}
+		
+		
+		System.out.println("city got = "+city1);
+		SimilarityIndexHelper helper = new SimilarityIndexHelper();
+		ResponseObject ro = helper.findSimilarCity(city1,factorValue,checkedFactors);
+  		
+		String json = new Gson().toJson(ro);
     	response.setContentType("application/json");
   		PrintWriter out = response.getWriter();
   		out.print(json);

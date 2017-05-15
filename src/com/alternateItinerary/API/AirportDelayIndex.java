@@ -33,17 +33,24 @@ public double findDelayIndex(String airport) {
         JSONObject json = new JSONObject(output2);
         DelayIndexMain obj = new Gson().fromJson(output2,DelayIndexMain.class);
 		
-        double delayIndex = obj.getDelayIndexes().get(0).getNormalizedScore();
+        double delayIndexRiskFactor = 0.3;
         
-        double delayIndexRiskFactor = 0.25;
-        
-        if(delayIndex >=3){
-        	delayIndexRiskFactor = 1;
+        if (obj.getDelayIndexes().size() > 0){
+        	double delayIndex =  obj.getDelayIndexes().get(0).getNormalizedScore();
+        	
+            if(delayIndex >=3){
+            	delayIndexRiskFactor = 1;
+            }
+            else if(delayIndex >=2){
+            	delayIndexRiskFactor = 0.5;
+            }
+            else{
+            	delayIndexRiskFactor = 0.25;
+            }
+            
         }
-        else if(delayIndex >=2){
-        	delayIndexRiskFactor = 0.5;
-        }
         
+//        System.out.println("Delay Index Risk Factor of "+airport+" is = "+delayIndexRiskFactor);
         return delayIndexRiskFactor;
 	}
 	

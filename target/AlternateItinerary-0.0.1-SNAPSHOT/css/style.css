@@ -16,3 +16,134 @@
 	opacity:0.7;
 	filter: alpha(opacity=50);
 }
+
+
+
+#cardHolder{
+	margin:20px;
+}
+
+#outerdiv{
+	margin:50px;
+}
+
+#outer{
+	margin:30px;
+}
+
+.p1{
+	display:inline;
+}
+
+.low::-webkit-meter-optimum-value {
+    background: #5CD16E; /* Green */
+	 border-radius: 2px; 
+}
+
+.medium::-webkit-meter-optimum-value {
+    background: #F4D852; /* yellow */
+     border-radius: 2px; 
+}
+
+.high::-webkit-meter-optimum-value {
+    background: #EA484C; /* red */
+	 border-radius: 2px; 
+}
+
+
+#bar{
+	display:inline;
+	float:left;
+}
+
+#div1{
+	background-color:#5CD16E;
+	height:10px;
+	float:left;
+}
+
+#div2{
+	background-color:#F4D852;
+	float:left;
+	height:10px;
+}
+
+#div3{
+	background-color:#EA484C;
+	height:10px;
+	float:left;
+}
+
+#l, #m, #h{
+	float:left;
+}
+
+
+#progressBar{
+	display:none;
+}
+
+.demo2 {
+            position: relative;
+            width: 4vw;
+            height: 4vw;
+            box-sizing: border-box;
+            float:right;
+}
+
+/* Popup container - can be anything you want */
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}

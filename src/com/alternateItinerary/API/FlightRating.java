@@ -31,20 +31,29 @@ public double findFlightRating(String airline, String flightnumber) {
         JSONObject json = new JSONObject(output2);
         
         FlightRatingMain obj = new Gson().fromJson(output2,FlightRatingMain.class);
-		double rating = obj.getRatings().get(0).getAllStars();
-		System.out.println("Rating of the flight is = "+ rating);
+        
+        double rating;
+        // bad request
+        if(apiResponse.getStatus() == 400 || obj.getRatings() == null) {
+        	rating = 2.5;
+        }
+        else{  // correct request	
+        	rating = obj.getRatings().get(0).getAllStars();
+        }
+        
+        //System.out.println("Rating of the flight is = "+ rating);
     	
 		double flightRatingRiskFactor = 0;
         
 		if(rating < 2){
 			flightRatingRiskFactor = 1;
 		}
-		else if(rating < 3.5){
+		else if(rating < 3){
 			flightRatingRiskFactor = 0.5;
 		}
-		else
+		else if(rating < 4)
 		{
-			flightRatingRiskFactor = 0;
+			flightRatingRiskFactor = 0.25;
 		}
         return flightRatingRiskFactor;
 	}

@@ -2,12 +2,9 @@
 package com.alternateItinerary.API;
 import java.util.List;
 
+
 import javax.ws.rs.core.MultivaluedMap;
-
-import org.json.JSONObject;
-
 import com.alternateItinerary.Config;
-import com.alternateItinerary.Model.AirportAutocomplete.AirportCode;
 import com.alternateItinerary.Model.DestinationImageApi.DestinationImageMain;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -37,8 +34,10 @@ public String findImage(String city) {
         List<DestinationImageMain> imageList = new Gson().fromJson(output2, token.getType());
     	
 		// DestinationImageMain obj = new Gson().fromJson(output2,DestinationImageMain.class);
-        String url = imageList.get(0).getUrl();
-		System.out.println(" Image URL = " + url);
+        String url = "https://thenanfang.com/wp-content/uploads/2016/09/shanghai-cruise-01-900x600.jpg";
+        if(!imageList.isEmpty()) {
+        	url = imageList.get(0).getUrl();
+        }
         
 	    return url;
 	}

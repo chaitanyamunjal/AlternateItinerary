@@ -1,16 +1,9 @@
 package com.alternateItinerary.API;
 
 import java.util.List;
-
 import javax.ws.rs.core.MultivaluedMap;
-
-import org.json.JSONObject;
-
 import com.alternateItinerary.Config;
 import com.alternateItinerary.Model.AirportAutocomplete.AirportCode;
-import com.alternateItinerary.Model.DelayIndexApi.DelayIndexMain;
-import com.alternateItinerary.Model.LocationKey.keyConvert;
-import com.alternateItinerary.Model.NearestRelevantAirport.AlternateOrigin;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.sun.jersey.api.client.Client;
@@ -34,11 +27,12 @@ public String findAirportCode(String airport) {
 		// fire the request
 		ClientResponse apiResponse = webResource.queryParams(queryParams).accept("application/json").get(ClientResponse.class);
 		String output2 = apiResponse.getEntity(String.class);
+	
 		TypeToken<List<AirportCode>> token = new TypeToken<List<AirportCode>>(){};
         List<AirportCode> airportList = new Gson().fromJson(output2, token.getType());
     	String airportCode = airportList.get(0).getValue();
         
-        System.out.println("airport code of"+ airport +" is "+airportCode);
+//        System.out.println("airport code of"+ airport +" is "+airportCode);
         return airportCode;
 	}
 

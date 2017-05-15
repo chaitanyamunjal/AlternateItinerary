@@ -34,7 +34,6 @@ public class WeatherForecastApi {
 		// fire the request
      	ClientResponse apiResponse = webResource.queryParams(queryParams).accept("application/json").get(ClientResponse.class);
      	String output2 = apiResponse.getEntity(String.class);
-     	
      	return output2;
 }
 	

@@ -3,7 +3,7 @@ package com.alternateItinerary.Helper;
 import org.json.JSONObject;
 
 
-import com.alternateItinerary.Model.WeatherTimeMachineApi.*;
+
 import com.alternateItinerary.Model.WeatherTimeMachineApi.*;
 import com.google.gson.Gson;
 
@@ -12,7 +12,6 @@ public class RiskFactorCalculator {
 	public double calclulateRiskFactor(String WeatherParameters){
 		
 		/* ==========  WEATHER RISK FACTOR CALCULATOR ===========   */
-		
 		
 		JSONObject json = new JSONObject(WeatherParameters);
         WeatherParams forecast = new Gson().fromJson(WeatherParameters,WeatherParams.class);
@@ -45,12 +44,20 @@ public class RiskFactorCalculator {
 		double riskFactor = 0;
 		riskFactor = 0.0025*windSpeed + 0.0025*temperature + 0.025*visibility + 2.5*precipIntensity;
 		
-		if(windSpeed > 30 || temperature < 20 || visibility < 5 || precipType == "snow" || precipIntensity > 0.03 ){
+		if(windSpeed > 30 || temperature < 20 || visibility < 4 || precipType == "snow" || precipIntensity > 0.05 ){
 			riskFactor = 1;
 		}
 		
-        return riskFactor;
-		/*
+		if(riskFactor == 1){
+			System.out.println("Weather params causing High Risk = "+windSpeed+" % "+temperature+" % "+visibility+" % "+precipType+" % "+precipIntensity);
+		}
+		
+        
+		return riskFactor;
+		
+        
+        
+        /*
 		 
 		// RISK FACTOR CALCULATION USING ACCU-WEATHER PARAMETERS
 		 

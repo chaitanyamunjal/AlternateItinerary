@@ -94,6 +94,46 @@
     <servlet-name>CityServlet</servlet-name>
     <url-pattern>/city</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>CustomCityServlet</servlet-name>
+    <servlet-class>com.alternateItinerary.Controller.CustomCityServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CustomCityServlet</servlet-name>
+    <url-pattern>/customcity</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CustomRiskServlet</servlet-name>
+    <servlet-class>com.alternateItinerary.Controller.CustomRiskServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CustomRiskServlet</servlet-name>
+    <url-pattern>/customrisk</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>SimilarityCustomizationServlet</servlet-name>
+    <servlet-class>com.alternateItinerary.Controller.SimilarityCustomizationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SimilarityCustomizationServlet</servlet-name>
+    <url-pattern>/similaritycustomization</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RiskCustomizationServlet</servlet-name>
+    <servlet-class>com.alternateItinerary.Controller.RiskCustomizationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RiskCustomizationServlet</servlet-name>
+    <url-pattern>/riskcustomization</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ThresholdServlet</servlet-name>
+    <servlet-class>com.alternateItinerary.Controller.ThresholdServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ThresholdServlet</servlet-name>
+    <url-pattern>/threshold</url-pattern>
+  </servlet-mapping>
   <filter>
     <filter-name>myfilter</filter-name>
     <filter-class>com.alternateItinerary.Controller.myfilter</filter-class>
@@ -107,5 +147,10 @@
     <url-pattern>/edit</url-pattern>
     <url-pattern>/logout</url-pattern>
     <url-pattern>/city</url-pattern>
+    <url-pattern>/customcity</url-pattern>
+    <url-pattern>/customrisk</url-pattern>
+    <url-pattern>/similaritycustomization</url-pattern>
+    <url-pattern>/riskcustomization</url-pattern>
+    <url-pattern>/threshold</url-pattern>
   </filter-mapping>
 </web-app>
