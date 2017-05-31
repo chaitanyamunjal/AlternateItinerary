@@ -12,9 +12,9 @@ public class Config {
 	
 	public static final String weatherKey1 = "a9b5ababe59098b8299406608427fe63";
 	
-	public static final String flightStatsKey = "90b9ee8f2d17764d3f7b4fd41efb7247"; // dcf544f4587b992baab836d8005adfc1
+	public static final String flightStatsKey = "a459346c09dd018f8c49d2ab8a43bddf" ;  // "90b9ee8f2d17764d3f7b4fd41efb7247"; // dcf544f4587b992baab836d8005adfc1
 	
-	public static final String flightStatsApplicationId = "a234755d";
+	public static final String flightStatsApplicationId = "c0d2c87e"; // "a234755d";
 	
 	public static final String webhoseKey = "11002572-4859-4b31-8f1a-0e4d8cf610fc";
 	

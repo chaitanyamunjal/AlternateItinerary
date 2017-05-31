@@ -79,7 +79,7 @@ public class PhaseTwoHelper {
 				if(!flfr.getBudget().equals("Unknown")){   
 					similarCitiesRiskFactor[k] = adrh.calculateParams(riskFactorsValue,riskFactorsChecked,similarCities[i], x, date,alternateOriginAirportCode,aac.findAirportCode(similarCities[i]),date1,previousDate1,previousDate2);
 					
-					if(similarCitiesRiskFactor[k] <= 5  && j<3){  // <= threshold2 or toRiskFactor
+					if(similarCitiesRiskFactor[k] <= toRiskFactor  && j<3){  // <= threshold2 or toRiskFactor
 	    				alternateDestination[j] = similarCities[i];
 	    				rf[j] = similarCitiesRiskFactor[k];
 	    				similarityIndex[j] = index[i];
